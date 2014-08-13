@@ -66,6 +66,7 @@ public class KK : MonoBehaviour
             }
         }
     }
+
     private void SpawnKerbal(int count)
     {
          ProtoCrewMember kerbal = HighLogic.CurrentGame.CrewRoster.GetNewKerbal();
@@ -73,13 +74,11 @@ public class KK : MonoBehaviour
         
     private void SpawnKerbal(ProtoCrewMember kerbal)
     {
-         kerbal.name = stringToEdit;
-         kerbal.courage = sliderValue;
-         kerbal.stupidity = sliderValue2;
-         kerbal.isBadass = buttonState;
-         kerbal.SetTimeForRespawn(0);
-         kerbal.Spawn();
-         kerbal.rosterStatus = ProtoCrewMember.RosterStatus.Available;
+        kerbal.name = stringToEdit;
+        kerbal.courage = sliderValue;
+        kerbal.stupidity = sliderValue2;
+        kerbal.isBadass = buttonState;
+        kerbal.rosterStatus = ProtoCrewMember.RosterStatus.Available;
     }
 
     public void OnGUI()
