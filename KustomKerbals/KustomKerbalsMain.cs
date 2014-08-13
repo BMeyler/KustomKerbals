@@ -70,14 +70,14 @@ public class KK : MonoBehaviour
     private void SpawnKerbal(int count)
     {
          ProtoCrewMember kerbal = HighLogic.CurrentGame.CrewRoster.GetNewKerbal();
+         kerbal.name = stringToEdit;
+         kerbal.courage = sliderValue;
+         kerbal.stupidity = sliderValue2;
+         kerbal.isBadass = buttonState;
     }
         
     private void SpawnKerbal(ProtoCrewMember kerbal)
     {
-        kerbal.name = stringToEdit;
-        kerbal.courage = sliderValue;
-        kerbal.stupidity = sliderValue2;
-        kerbal.isBadass = buttonState;
         kerbal.rosterStatus = ProtoCrewMember.RosterStatus.Available;
     }
 
