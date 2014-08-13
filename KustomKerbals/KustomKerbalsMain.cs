@@ -23,7 +23,6 @@ public class KK : MonoBehaviour
     private static GUIStyle windowStyle = null;
     private static bool buttonState = false;
     private static bool windowState = false;
-    private static bool createKerbal = false;
     public string stringToEdit = "Jebediah Kerman Jr.";
     public float sliderValue = 0.0f;
     public float sliderValue2 = 0.0f;
@@ -138,4 +137,6 @@ public class KK : MonoBehaviour
 
         GUI.DragWindow();
     }
+
+    public int kerbal { get; set; }
 }
