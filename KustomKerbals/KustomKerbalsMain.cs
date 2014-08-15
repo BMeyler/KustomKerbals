@@ -26,19 +26,8 @@ public class KK : MonoBehaviour
     public string stringToEdit = "Jebediah Kerman Jr.";
     public float sliderValue = 0.0f;
     public float sliderValue2 = 0.0f;
+    public int kerbal { get; set; }
     public static string Path = (KSPUtil.ApplicationRootPath + HighLogic.CurrentGame + "peristent.sfs");
-
-    //Tells the plugin to draw the window.
-    public void ShowWindow()
-    {
-        windowState = true;
-    }
-
-    //Tells the plugin to stop drawing the window.
-    public void HideWindow()
-    {
-        windowState = false;
-    }
 
     public void Awake()
     {
@@ -67,6 +56,7 @@ public class KK : MonoBehaviour
         }
     }
 
+    //Gets a new kerbal and sets his stats.
     private void SpawnKerbal(int count)
     {
          ProtoCrewMember kerbal = HighLogic.CurrentGame.CrewRoster.GetNewKerbal();
@@ -75,26 +65,20 @@ public class KK : MonoBehaviour
          kerbal.stupidity = sliderValue2;
          kerbal.isBadass = buttonState;
     }
-        
+    
+    //makes the new kerbal available for use.
     private void SpawnKerbal(ProtoCrewMember kerbal)
     {
         kerbal.rosterStatus = ProtoCrewMember.RosterStatus.Available;
     }
 
-    public void OnGUI()
+    //Tells the window to open.
+    public void Update()
     {
-        //Button to open window.
-        if (GUI.Button(new Rect(10, 20, 115, 20), "Open Kustomizer"))
+        if ((GameSettings.MODIFIER_KEY.GetKey()) && Input.GetKeyDown(KeyCode.K))
         {
-            ShowWindow();
-            Debug.Log("KK window shown.");
-        }
-
-        //Button to close window.
-        if (GUI.Button(new Rect(10, 60, 115, 20), "Hide Kustomizer"))
-        {
-            HideWindow();
-            Debug.Log("KK window hidden.");
+            windowState = true;
+            Debug.Log("KK window opened");
         }
     }
 
@@ -127,15 +111,12 @@ public class KK : MonoBehaviour
         if (GUI.Button(new Rect(7, 125, 150, 30),  "Kreate Kustom Kerbal"))
         {
             Debug.Log("Kustom Kerbal Kreated.");
-            Debug.Log("Name: " + stringToEdit);
-            Debug.Log("Courage: " + sliderValue);
-            Debug.Log("Stupidity: " + sliderValue2);
-            Debug.Log("Badass: " + buttonState);
+            Debug.Log("KK window closed.");
             SpawnKerbal(kerbal);
+            windowState = false;
+            ScreenMessages.PostScreenMessage("Kustom Kerbal Spawned, closing window...", 1, ScreenMessageStyle.UPPER_CENTER);
         }
 
         GUI.DragWindow();
     }
-
-    public int kerbal { get; set; }
 }
