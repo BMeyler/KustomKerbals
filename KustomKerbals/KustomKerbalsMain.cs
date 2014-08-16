@@ -23,6 +23,7 @@ public class KK : MonoBehaviour
     private static GUIStyle windowStyle = null;
     private static bool buttonState = false;
     private static bool windowState = false;
+    private static bool isKSCLocked = false;
     public string stringToEdit = "Jebediah Kerman Jr.";
     public float sliderValue = 0.0f;
     public float sliderValue2 = 0.0f;
@@ -78,6 +79,11 @@ public class KK : MonoBehaviour
         if ((GameSettings.MODIFIER_KEY.GetKey()) && Input.GetKeyDown(KeyCode.K))
         {
             windowState = true;
+            if (!isKSCLocked)
+            {
+                InputLockManager.SetControlLock(ControlTypes.KSC_FACILITIES, "KSCLock");
+                isKSCLocked = true;
+            }
             Debug.Log("KK window opened");
         }
     }
@@ -93,13 +99,13 @@ public class KK : MonoBehaviour
         //Sets kerbal's courage. 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Courage:");
-        sliderValue = GUILayout.HorizontalSlider(sliderValue, 0.0f, 100.0f);
+        sliderValue = GUILayout.HorizontalSlider(sliderValue, 0.0f, 1.0f);
         GUILayout.EndHorizontal();
 
         //Sets kerbal's stupidity.
         GUILayout.BeginHorizontal();
         GUILayout.Label("Stupidity:");
-        sliderValue2 = GUILayout.HorizontalSlider(sliderValue2, 0.0f, 100.0f);
+        sliderValue2 = GUILayout.HorizontalSlider(sliderValue2, 0.0f, 1.0f);
         GUILayout.EndHorizontal();
 
         //Toggles badass state.
@@ -115,6 +121,11 @@ public class KK : MonoBehaviour
             SpawnKerbal(kerbal);
             windowState = false;
             ScreenMessages.PostScreenMessage("Kustom Kerbal Spawned, closing window...", 1, ScreenMessageStyle.UPPER_CENTER);
+            if (isKSCLocked)
+            {
+                InputLockManager.RemoveControlLock("KSCLock");
+                isKSCLocked = false;
+            }
         }
 
         GUI.DragWindow();
