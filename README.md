@@ -69,6 +69,13 @@ Before posting a bug report, follow these steps:
 
 [B]CHANGELOG:[/B]
 
+Version 1.2:
+
+-Added optional toolbar support
+-Added a Main Menu
+-Organized the code
+--Renamed Main.cs to CreationHandler.cs
+
 Version 1.1:
 
 -Removed the open and close buttons.
